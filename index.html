@@ -143,9 +143,7 @@
         if (reps <= 1) {
             return [n]
         } else {
-            replicate(n, reps - 1).forEach((el) => {
-              arr.push(el)
-            })
+            arr = replicate(n, reps - 1)
             arr.push(n)
             return arr
         }
