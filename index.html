@@ -329,76 +329,86 @@
         }
     }
 
-    function insertForUnsorted(array, target) {
-        if (array.length === 1) {
-            if (array[0] >= target) {
-                console.log('targetA', target)
-                console.log('a', array[0])
-                array.unshift(target)
-                console.log(array)
-                return array
-            } else {
-                console.log('targetB', target)
-                console.log('b', array)
-                return array
-            }
-        } else {
-            array = sort(array)
-            console.log('sorted', array)
-
-            let sl = array.length/2
-
-            let newArray = []
-
-            let left = (array.slice(0, sl))
-            let lenL = left.length
-
-            console.log('leftPre',left)
-            left = insertForUnsorted(left, target)
-            console.log('left',left)
-
-            if (left.length > 1 && (lenL !== left.length)) {
-                console.log('left+',left)
-                left.forEach((el) => {
-                    newArray.push(el)
-                })
-                array.slice(sl).forEach((el) => {
-                    newArray.push(el)
-                })
-                return newArray
-            } else {
-                left.forEach((el) => {
-                    newArray.push(el)
-                })
-
-                let right = array.slice(sl)
-                let lenR = right.length
-
-                console.log('rightPre',right)
-                right = insertForUnsorted(array.slice(sl), target)
-                console.log('right',right)
-
-                if (right.length > 1 && (lenR !== right.length)) {
-                    console.log('right+',right)
-                    right.forEach((el) => {
-                        newArray.push(el)
-                    })
-                    return newArray
-                } else {
-                    right.forEach((el) => {
-                        newArray.push(el)
-                    })
-                    console.log('nofind', newArray)
-                    return newArray
-                }
-            }
-        }
-    }
+    // function insertForUnsorted(array, target) {
+    //     if (array.length === 1) {
+    //         if (array[0] >= target) {
+    //             console.log('INSERTED: ', target)
+    //             console.log('a', array[0])
+    //             array.unshift(target)
+    //             console.log(array)
+    //             return array
+    //         } else {
+    //             console.log('targetB', target)
+    //             console.log('b', array)
+    //             return array
+    //         }
+    //     } else {
+    //         array = sort(array)
+    //         console.log('sorted', array)
+    //
+    //         let sl = array.length/2
+    //
+    //         let newArray = []
+    //
+    //         let left = (array.slice(0, sl))
+    //         let lenL = left.length
+    //
+    //         console.log('leftPre',left)
+    //         left = insertForUnsorted(left, target)
+    //
+    //         if (left.length > 1 && (lenL !== left.length)) {
+    //             console.log('left+',left)
+    //             left.forEach((el) => {
+    //                 newArray.push(el)
+    //             })
+    //             array.slice(sl).forEach((el) => {
+    //                 newArray.push(el)
+    //             })
+    //             return newArray
+    //         } else {
+    //             left.forEach((el) => {
+    //                 newArray.push(el)
+    //             })
+    //
+    //             let right = array.slice(sl)
+    //             let lenR = right.length
+    //
+    //             console.log('rightPre',right)
+    //             right = insertForUnsorted(array.slice(sl), target)
+    //
+    //             if (right.length > 1 && (lenR !== right.length)) {
+    //                 console.log('right+',right)
+    //                 right.forEach((el) => {
+    //                     newArray.push(el)
+    //                 })
+    //                 return newArray
+    //             } else {
+    //                 right.forEach((el) => {
+    //                     newArray.push(el)
+    //                 })
+    //                 console.log('nofind', newArray)
+    //                 return newArray
+    //             }
+    //         }
+    //     }
+    // }
 
     function insertForSorted(array, target) {
+        let len = array.length
+
+        array = insert(array, target)
+
+        if (len < array.length) {
+            return array
+        } else {
+            array.push(target)
+            return array
+        }
+    }
+    function insert(array, target) {
         if (array.length === 1) {
             if (array[0] >= target) {
-                console.log('targetA', target)
+                console.log('INSERTED: ', target)
                 console.log('a', array[0])
                 array.unshift(target)
                 console.log(array)
@@ -419,8 +429,7 @@
             let lenL = left.length
 
             console.log('leftPre',left)
-            left = insertForSorted(left, target)
-            console.log('left',left)
+            left = insert(left, target)
 
             if (left.length > 1 && (lenL !== left.length)) {
                 console.log('left+',left)
@@ -440,8 +449,7 @@
                 let lenR = right.length
 
                 console.log('rightPre',right)
-                right = insertForSorted(array.slice(sl), target)
-                console.log('right',right)
+                right = insert(array.slice(sl), target)
 
                 if (right.length > 1 && (lenR !== right.length)) {
                     console.log('right+',right)
