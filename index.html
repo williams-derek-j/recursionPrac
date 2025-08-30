@@ -171,20 +171,34 @@
             let right = sort(arr.slice(sl))
 
             arr = []
-            left.reverse()
-            right.reverse()
             while (left.length > 0) {
-                if (right.length === 0 ){
-                    left.forEach((el) => {
-                        arr.push(left.pop())
-                    })
-                } else {
-                    left[left.length - 1] < right[right.length - 1] ? arr.push(left.pop()) : arr.push(right.pop())
+                while (left[0] > right[0]) {
+                    arr.push(right[0])
+                    right = right.slice(1)
                 }
+                arr.push(left[0])
+                left = left.slice(1)
             }
-            while (right.length > 0) {
-                arr.push(right.pop())
+            if (right.length > 0) {
+                right.forEach((el) => {
+                    arr.push(el)
+                })
             }
+            // left.reverse() -- this way is probably more resource hungry?
+            // right.reverse()
+            // while (left.length > 0) {
+            //     if (right.length === 0 ){
+            //         left.forEach((el) => {
+            //             arr.push(left.pop())
+            //         })
+            //     } else {
+            //         left[left.length - 1] < right[right.length - 1] ? arr.push(left.pop()) : arr.push(right.pop())
+            //     }
+            // }
+            // while (right.length > 0) { // left half empty but right half not? right must necessarily be sorted, push them in one by one until empty
+            //     arr.push(right.pop())
+            // }
+            console.log('final', arr)
             return arr
         }
     }
