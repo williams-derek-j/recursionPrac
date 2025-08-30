@@ -161,82 +161,6 @@
         }
     }
 
-    // function quadSort(arr) {
-    //     if (arr.length === 1) {
-    //         return arr
-    //     } else {
-    //         let sl = arr.length / 4
-    //
-    //         let nw = sort(arr.slice(0, sl))
-    //         let ne = sort(arr.slice(sl, sl * 2))
-    //         let sw = sort(arr.slice(sl * 2, sl * 3))
-    //         let se = sort(arr.slice(sl * 3, sl * 4))
-    //
-    //         arr = []
-    //         while (se.length > 0) {
-    //             while(sw.length > 0) {
-    //                 while(ne.length > 0) {
-    //                     while(nw.length > 0) {
-    //                     })
-    //
-    //                 })
-    //             }
-    //         }
-    //         // while (nw.length > 0) {
-    //         //     while (ne.length > 0) {
-    //         //         while (sw.length > 0) {
-    //         //             while (sw[0] > se[0]) {
-    //         //                 continue
-    //         //             }
-    //         //             arr.push(sw[0])
-    //         //             sw = sw.slice(1)
-    //         //         }
-    //         //         while (ne[0] > sw[0]) {
-    //         //             while (ne[0] > se[0]) {
-    //         //                 continue
-    //         //             }
-    //         //             arr.push(ne[0])
-    //         //             ne = nw.slice(1)
-    //         //             continue
-    //         //         }
-    //         //         arr.push(ne[0])
-    //         //         ne = ne.slice(1)
-    //         //     }
-    //         //     while (nw[0] > ne[0]) {
-    //         //         while (nw[0] > sw[0]) {
-    //         //             while (nw[0] > se[0]) {
-    //         //                 continue
-    //         //             }
-    //         //             arr.push(nw[0])
-    //         //             nw = nw.slice(1)
-    //         //             continue
-    //         //         }
-    //         //         arr.push(nw[0])
-    //         //         nw = nw.slice(1)
-    //         //         continue
-    //         //     }
-    //         //     arr.push(nw[0])
-    //         //     nw = nw.slice(1)
-    //         // }
-    //         // if (ne.length > 0) {
-    //         //     ne.forEach((el) => {
-    //         //         arr.push(el)
-    //         //     })
-    //         // }
-    //         // if (sw.length > 0) {
-    //         //     sw.forEach((el) => {
-    //         //         arr.push(el)
-    //         //     })
-    //         // }
-    //         // if (se.length > 0) {
-    //         //     se.forEach((el) => {
-    //         //         arr.push(el)
-    //         //     })
-    //         // }
-    //         // return arr
-    //     }
-    // }
-
     function triple(arr) {
         if (arr.length <= 1) {
             return arr
@@ -256,12 +180,13 @@
         } else if (arr.length > 2) {
             let sl = arr.length / 3
 
-            let a = sort(arr.slice(0, sl))
-            let b = sort(arr.slice(sl, sl*2))
-            let c = sort(arr.slice(sl*2, sl*3))
+            let a = triple(arr.slice(0, sl))
+            let b = triple(arr.slice(sl, sl*2))
+            let c = triple(arr.slice(sl*2, sl*3))
             console.log(a,b,c)
 
             arr = []
+
             while (c.length > 0) {
                 while (b.length > 0) {
                     while (a.length > 0) {
@@ -379,5 +304,31 @@
             return arr
         }
     }
+
+    function find(array, target) {
+        if (array.length === 1) {
+            if (array[0] === target) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            let sl = array.length/2
+
+            let left = find(array.slice(0, sl), target)
+
+            if (left) {
+                return true
+            } else {
+                let right = find(array.slice(sl), target)
+                if (right) {
+                    return true
+                }
+            }
+            return false
+        }
+    }
+
+
 </script>
 </html>
