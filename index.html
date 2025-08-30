@@ -163,15 +163,12 @@
 
     function sort(arr) {
         if (arr.length === 1) {
-            console.log('arr',arr)
             return arr
         } else {
             let sl = arr.length/2
-            console.log('sl,arr',sl,arr)
 
             let left = sort(arr.slice(0, sl))
             let right = sort(arr.slice(sl))
-            console.log('sl,l,r',sl,left,right)
 
             arr = []
             left.reverse()
