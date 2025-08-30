@@ -449,7 +449,7 @@
                 let lenR = right.length
 
                 console.log('rightPre',right)
-                right = insert(array.slice(sl), target)
+                right = insert(right, target)
 
                 if (right.length > 1 && (lenR !== right.length)) {
                     console.log('right+',right)
@@ -466,6 +466,32 @@
                 }
             }
         }
+    }
+
+    function actualBinaryInsert(array, target) {
+        if (array.length === 1) {
+            if (array[0] <= target) {
+                array.push(target)
+                return array
+            } else {
+                array.unshift(target)
+                return array
+            }
+        }
+        let arr = []
+
+        let left = 0
+        let right = array.length
+        let mid = (right - left)/2
+
+        if (array[mid] > target) {
+            arr = [...actualBinaryInsert(array.slice(left,mid), target)]
+            arr.push(...array.slice(mid))
+        } else {
+            arr = [...actualBinaryInsert(array.slice(mid), target)]
+            arr.unshift(...array.slice(left,mid))
+        }
+        return arr
     }
 
 
