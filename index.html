@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+</body>
+<script>
+    c = {
+        name: 'c',
+    }
+    b = {
+        name: 'b',
+        child: c
+    }
+    a = {
+        name: 'a',
+        child: b
+    }
+
+    function reverse(node) {
+        if (!node.child) {
+            return node;
+        } else {
+            let child = node.child;
+            delete node.child;
+
+            if (child.child) { // reduce (1) unnecessary recursive call -- so efficient!
+                reverse(child).child = node;
+                return node;
+            } else {
+                child.child = node;
+                return node;
+            }
+        }
+    }
+
+    function collatz(n) {
+        if (n === 1) {
+            return 0
+        } else {
+            if (n % 2 === 0) {
+                return (1 + collatz(n / 2))
+            } else {
+                return (1 + collatz(3*n + 1))
+            }
+        }
+    }
+
+    function sumRange(n) {
+        if (n === 1) {
+            return n
+        } else {
+            return n += sumRange(n - 1)
+        }
+    }
+
+    function power(n, x) {
+        if (x === 1) {
+            return n
+        } else {
+            return n *= power(n, x - 1)
+        }
+    }
+
+    function factorial(n) {
+        if (n === 1) {
+            return n
+        } else {
+            return n *= factorial(n - 1)
+        }
+    }
+
+    function productOfArray(array) {
+        if (array.length === 0) {
+            return 0
+        } else if (array.length === 1) {
+            return array[0]
+        } else {
+            let n = array.pop()
+            return n *= productOfArray(array)
+        }
+    }
+
+    var test = {
+        data: {
+            info: {
+                stuff: {
+                    thing: {
+                        moreStuff: {
+                            magicNumber: 44,
+                            something: 'foo2'
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function contains(object, target) {
+        for (let prop in object) {
+            if (object[prop] === target) {
+                return true;
+            } else if (typeof object[prop] === 'object') {
+                return contains(object[prop], target)
+            }
+        }
+        return false;
+    }
+
+    function totalN(array) {
+        let total = 0;
+
+        array.forEach((el) => {
+            if (typeof el === 'object') {
+                total += totalN(el)
+            }
+            else if (typeof el === 'number') {
+                total += 1;
+            }
+        })
+        return total;
+    }
+
+    function sumSquares(array) {
+        let sum = 0;
+
+        array.forEach((el) => {
+            if (typeof el === 'object') {
+                sum += sumSquares(el)
+            } else if (typeof el === 'number') {
+                sum += (el*el)
+            }
+        })
+
+        return sum;
+    }
+
+    function replicate(n, reps) {
+        let arr = []
+
+        if (reps <= 1) {
+            return [n]
+        } else {
+            replicate(n, reps - 1).forEach((el) => {
+              arr.push(el)
+            })
+            arr.push(n)
+            return arr
+        }
+    }
+</script>
+</html>
